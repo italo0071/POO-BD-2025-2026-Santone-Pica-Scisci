@@ -122,4 +122,3 @@ CREATE TRIGGER TRG_VerificaEDecrementaSkip
     BEFORE INSERT ON CRONOLOGIA
     FOR EACH ROW
 EXECUTE FUNCTION fn_verifica_e_decrementa_skip();
-
