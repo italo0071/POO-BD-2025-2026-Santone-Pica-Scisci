@@ -1,6 +1,5 @@
 package model;
 
-public interface Riproducibile
-{
+public interface Riproducibile {
     void riproduci(Utente utente);
 }

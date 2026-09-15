@@ -3,15 +3,15 @@ package model;
 import java.time.LocalDateTime;
 
 public class Cronologia {
+    private int idAscolto;
     private LocalDateTime dataOra;
     private int secondiAscoltati;
     private boolean isOnDemand;
-
     private Utente utente;
     private Brano branoAscoltato;
 
-    public Cronologia(LocalDateTime dataOra, int secondiAscoltati, boolean isOnDemand, Utente utente, Brano branoAscoltato)
-    {
+    public Cronologia(int idAscolto, LocalDateTime dataOra, int secondiAscoltati, boolean isOnDemand, Utente utente, Brano branoAscoltato) {
+        this.idAscolto = idAscolto;
         this.dataOra = dataOra;
         this.secondiAscoltati = secondiAscoltati;
         this.isOnDemand = isOnDemand;
@@ -19,14 +19,15 @@ public class Cronologia {
         this.branoAscoltato = branoAscoltato;
     }
 
-    public boolean isCompletato()
-    {
-        if (this.branoAscoltato != null)
-        {
+    public boolean isCompletato() {
+        if (this.branoAscoltato != null) {
             return this.secondiAscoltati >= this.branoAscoltato.getDurataSecondi();
         }
         return false;
     }
+
+    public int getIdAscolto() { return idAscolto; }
+    public void setIdAscolto(int idAscolto) { this.idAscolto = idAscolto; }
 
     public LocalDateTime getDataOra() { return dataOra; }
     public void setDataOra(LocalDateTime dataOra) { this.dataOra = dataOra; }

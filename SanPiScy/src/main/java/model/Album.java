@@ -4,47 +4,42 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Album implements Riproducibile
-{
+public class Album implements Riproducibile {
+    private int idAlbum;
     private String titolo;
     private LocalDate dataUscita;
-
+    private String urlCopertina;
     private List<Brano> listaBrani;
 
-    public Album(String titolo, LocalDate dataUscita)
-    {
+    public Album(int idAlbum, String titolo, LocalDate dataUscita, String urlCopertina) {
+        this.idAlbum = idAlbum;
         this.titolo = titolo;
         this.dataUscita = dataUscita;
-        this.listaBrani = new ArrayList<>(); // inizializzazione della lista per evitare NullPointerException
+        this.urlCopertina = urlCopertina;
+        this.listaBrani = new ArrayList<>();
     }
 
     @Override
-    public void riproduci(Utente utente)
-    {
+    public void riproduci(Utente utente) {
         System.out.println(" Avvio riproduzione dell'album: " + this.titolo);
-
-        // ciclo for-each: per ogni brano nella nostra lista, lo facciamo suonare
-        for (Brano b : this.listaBrani)
-        {
-            b.riproduci(utente); // col polimorfismo diamo al singolo brano il compito di farsi sentire!
+        for (Brano b : this.listaBrani) {
+            b.riproduci(utente);
         }
-
         System.out.println("⏹ Riproduzione album terminata.");
     }
 
-    public void aggiungiBrano(Brano b)
-    {
-        this.listaBrani.add(b);
-    }
+    public void aggiungiBrano(Brano b) { this.listaBrani.add(b); }
 
-    public int calcolaDurataTotale()
-    {
+    public int calcolaDurataTotale() {
         int totale = 0;
         for (Brano b : listaBrani) {
             totale += b.getDurataSecondi();
         }
         return totale;
     }
+
+    public int getIdAlbum() { return idAlbum; }
+    public void setIdAlbum(int idAlbum) { this.idAlbum = idAlbum; }
 
     public String getTitolo() { return titolo; }
     public void setTitolo(String titolo) { this.titolo = titolo; }
@@ -53,4 +48,5 @@ public class Album implements Riproducibile
     public void setDataUscita(LocalDate dataUscita) { this.dataUscita = dataUscita; }
 
     public List<Brano> getListaBrani() { return listaBrani;}
+    public String getUrlCopertina() { return this.urlCopertina; }
 }

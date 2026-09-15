@@ -1,21 +1,26 @@
 package org.example;
 
-import gui.Home; // <-- Ora importiamo correttamente la nuova classe "Home"
-import controller.PlayerController;
+import db.DatabaseConnection;
+import gui.AuthWindow;
 import javax.swing.SwingUtilities;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 public class Main {
     public static void main(String[] args) {
-        // Avvia l'interfaccia grafica nel thread corretto di Java Swing
-        SwingUtilities.invokeLater(() -> {
+        System.out.println("Avvio di SanPiScy Music...");
 
-            // 1. Creiamo il controller che gestisce la logica musicale
-            PlayerController controller = new PlayerController();
+        // Test della connessione al DB all'avvio
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            if (conn != null) {
+                System.out.println("Connessione al database PostgreSQL avvenuta con successo!");
+            }
+        } catch (SQLException e) {
+            System.err.println("Errore di connessione al DB. Verifica URL, utente e password.");
+            e.printStackTrace();
+        }
 
-            // 2. Avviamo la nostra nuova interfaccia "Home"
-            Home app = new Home();
-
-            app.setVisible(true);
-        });
+        // Avvio dell'interfaccia grafica
+        SwingUtilities.invokeLater(() -> new AuthWindow().setVisible(true));
     }
 }

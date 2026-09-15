@@ -3,58 +3,45 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Artista extends Utente
-{
+public class Artista extends Utente {
+    private int idArtista;
     private String nomeDArte;
     private String biografia;
     private boolean verificato;
-
     private List<Album> albumPubblicati;
 
-    public Artista(String nome, String cognome, String username, String email, String password, String nomeDArte, String biografia)
-    {
-        super(nome, cognome, username, email, password);
+    public Artista(int idUtente, int idArtista, String nome, String cognome, String username, String email, String password, String nomeDArte, String biografia) {
+        super(idUtente, nome, cognome, username, email, password);
+        this.idArtista = idArtista;
         this.nomeDArte = nomeDArte;
         this.biografia = biografia;
-        this.verificato = false; // di default un nuovo profilo artista non ha ancora la spunta blu
-        this.albumPubblicati = new ArrayList<>(); // inizializzazione della lista vuota per prevenire eccezioni
+        this.verificato = false;
+        this.albumPubblicati = new ArrayList<>();
     }
 
     @Override
-    public void ricevePubblicita()
-    {
+    public void ricevePubblicita() {
         System.out.println("check del poliformismo, bravo amo tu addirittura fatturi e non hai l'ad");
     }
 
     @Override
     public boolean puoScaricareOffline() { return true; }
 
-
     public void pubblicaAlbum(Album album) {
         this.albumPubblicati.add(album);
     }
 
-    public String getNomeDArte() {
-        return nomeDArte;
-    }
-    public void setNomeDArte(String nomeDArte) {
-        this.nomeDArte = nomeDArte;
-    }
+    public int getIdArtista() { return idArtista; }
+    public void setIdArtista(int idArtista) { this.idArtista = idArtista; }
 
-    public String getBiografia() {
-        return biografia;
-    }
-    public void setBiografia(String biografia) {
-        this.biografia = biografia;
-    }
+    public String getNomeDArte() { return nomeDArte; }
+    public void setNomeDArte(String nomeDArte) { this.nomeDArte = nomeDArte; }
 
-    public boolean isVerificato() {
-        return verificato;
-    }
-    public void setVerificato(boolean verificato) {
-        this.verificato = verificato;
-    }
+    public String getBiografia() { return biografia; }
+    public void setBiografia(String biografia) { this.biografia = biografia; }
 
-    public List<Album> getAlbumPubblicati() { return albumPubblicati; }  // l'inserimento degli album puo' farlo esclusivamente il metodo pubblicaAlbum().
+    public boolean isVerificato() { return verificato; }
+    public void setVerificato(boolean verificato) { this.verificato = verificato; }
+
+    public List<Album> getAlbumPubblicati() { return albumPubblicati; }
 }
-
